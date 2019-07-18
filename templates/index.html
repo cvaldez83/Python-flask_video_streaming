@@ -1,9 +1,95 @@
-<html>
-  <head>
-    <title>Video Streaming Demonstration</title>
-  </head>
-  <body>
-    <h1>Video Streaming Demonstration</h1>
-    <img src="{{ url_for('video_feed') }}">
-  </body>
+<!-- my code -->
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <!--CV-->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/tits.css') }}">
+
+  <meta name="theme-color" content="#fafafa">
+</head>
+
+<body>
+  <!--[if IE]>
+    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+  <![endif]-->
+
+  <!-- Add your site or application content here -->
+  
+  <div class="wrap">
+      <div class="player">
+        <img width="640" height="360" controls="controls" src="{{ url_for('video_feed') }}" width="80%"></img>
+      </div>
+      <div class="bottom">
+        <button id='btn_call'>Call Charlie</button>
+        <button id='btn_dispense'>Dispense Treat</button>
+        <button class="stopbtn" id='btn_servo_stop'>Kill Servos</button>
+      </div>
+      <div class="bottom">
+        <button class="arrow-button" id='btn_up'><i class="fa fa-caret-up"></i></button>
+      </div>
+      <div class="bottom">
+        <button class="arrow-button" id='btn_left'><i class="fa fa-caret-left"></i></button>
+        <button class="arrow-button" id='btn_down'><i class="fa fa-caret-down"></i></button>
+        <button class="arrow-button" id='btn_right'><i class="fa fa-caret-right"></i></button>
+      </div>
+  </div>
+  <!--
+  <p>
+    <button type='button' id='btn_dispense'>DISPENSE</button>
+  </p> 
+  -->
+
+  <!--Loads jquery-->
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+  <script>window.jQuery || document.write('<script src="js/vendor/jquery-3.4.1.min.js"><\/script>')</script>
+
+  <!--jquery to click buttons-->
+  <script>
+    $(document).ready(function() {
+      $('#btn_dispense').click(function() {
+          console.log('Dispensing!');
+          $.post('/dispense');
+      });
+
+      $('#btn_up').click(function() {
+          console.log('Up');
+          $.post('/up');
+      });
+
+      $('#btn_down').click(function() {
+          console.log('Down');
+          $.post('/down');
+      });
+      
+      $('#btn_left').click(function() {
+          console.log('Left');
+          $.post('/left');
+      });
+
+      $('#btn_right').click(function() {
+          console.log('Right');
+          $.post('/right');
+      });
+
+      $('#btn_servo_stop').click(function() {
+          console.log('Servo Stop');
+          $.post('/servo_stop');
+      });
+
+    });
+
+
+
+  </script>
+
+</body>
+
 </html>
