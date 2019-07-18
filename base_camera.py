@@ -1,5 +1,7 @@
 import time
 import threading
+import os
+
 try:
     from greenlet import getcurrent as get_ident
 except ImportError:
@@ -99,6 +101,9 @@ class BaseCamera(object):
             # the last 10 seconds then stop the thread
             if time.time() - BaseCamera.last_access > 10:
                 frames_iterator.close()
-                print('Stopping camera thread due to inactivity.')
+                #adding servo pwm stop command: https://github.com/richardghirst/PiBits/tree/master/ServoBlaster
+                os.system("echo 2=0 > /dev/servoblaster") # 2 is raspberry pi gpio pin # 18
+                os.system("echo 6=0 > /dev/servoblaster") # 6 is raspberry pi gpio pin # 24
+                print('Stopping camera thread and servos due to inactivity.')
                 break
         BaseCamera.thread = None
