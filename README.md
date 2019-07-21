@@ -1,4 +1,4 @@
-This forked version of Miguel Grinberg's flask-video-streaming repo has been modified to allow the use of two servos to pan and tilt the picamera.  Servos are controlled from client's web browser.  In addition, one can transmit audio from client browser's microphone to raspberry pi with help of flask_socketio. 
+This forked version of Miguel Grinberg's flask-video-streaming repo has been modified to allow the use of two servos to pan and tilt the picamera.  Servos are controlled from client's web browser.  In addition, this repo also uses Miguel's socketio audio example (https://github.com/miguelgrinberg/socketio-examples/tree/master/audio) to allow one to transmit audio from client browser's microphone to raspberry pi.
 
 
 Software Requirements:
