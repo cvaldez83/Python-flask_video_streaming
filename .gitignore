@@ -1,4 +1,9 @@
+.gitignore
 credentials.py
+key.pem
+cert.pem
+*.wav
+venv/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
