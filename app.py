@@ -6,12 +6,7 @@ from flask_basicauth import BasicAuth
 from main import PiThing
 import time #CV
 import credentials
-
-import uuid
 import wave
-from flask import Blueprint, current_app, session, url_for
-from flask_socketio import emit
-from flask_socketio import SocketIO         #CV added
 import pyaudio #CV added
 chunk = 1024
 
@@ -33,8 +28,6 @@ app.config['BASIC_AUTH_USERNAME'] = credentials.login_u
 app.config['BASIC_AUTH_PASSWORD'] = credentials.login_p
 app.config['BASIC_AUTH_FORCE'] = True #protects entire site
 app.config['FILEDIR'] = 'static/_files/' #CV added
-
-socketio = SocketIO(app)
 
 basic_auth = BasicAuth(app)
 
@@ -77,6 +70,7 @@ def servo_stop():
 def gen(camera):
     """Video streaming generator function."""
     while True:
+        # print(time.time())
         frame = camera.get_frame()
         yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
@@ -89,79 +83,50 @@ def video_feed():
                     mimetype='multipart/x-mixed-replace; boundary=frame')
 
 
-############################################
-#    SOCKETIO 
-############################################
 
-@socketio.on('start-recording', namespace='/audio')
-def start_recording(options):
-    """Start recording audio from the client."""
-    id = uuid.uuid4().hex  # server-side filename
-    session['wavename'] = id + '.wav'
-    wf = wave.open(current_app.config['FILEDIR'] + session['wavename'], 'wb')
-    wf.setnchannels(options.get('numChannels', 1))
-    wf.setsampwidth(options.get('bps', 16) // 8)
-    wf.setframerate(options.get('fps', 44100))
-    session['wavefile'] = wf
+# @socketio.on('play-recording', namespace='/audio')
+# def play_recording():
+#     '''stream audio to server''' #CV
+#     print('FUNCTION play_recording STARTED')
+#     wf = wave.open(current_app.config['FILEDIR'] + session['wavename'], 'rb')
+#     print('OPENED WAVE FILE')
+#     print('NUMBER OF FRAMES')
+#     print(wf.getnframes())
+#     p = pyaudio.PyAudio() #CV
+#     print('CREATED PY AUDIO OBJECT P')
+#     stream = p.open(format = p.get_format_from_width(wf.getsampwidth()), #CV
+#                 channels = wf.getnchannels(),   #CV
+#                 rate = 48000,   #CV
+#                 output = True)  #CV
 
+#     print('CREATED STREAM')
+#     data = wf.readframes(chunk) #CV
+#     print('CREATED DATA')
 
-@socketio.on('write-audio', namespace='/audio')
-def write_audio(data):
-    """Write a chunk of audio from the client."""
-    session['wavefile'].writeframes(data)
-
-
-@socketio.on('end-recording', namespace='/audio')
-def end_recording():
-    """Stop recording audio from the client."""
-    emit('add-wavefile', url_for('static',
-                                 filename='_files/' + session['wavename']))
-    session['wavefile'].close()
-    del session['wavefile']
-    # del session['wavename']
-
-@socketio.on('play-recording', namespace='/audio')
-def play_recording():
-    '''stream audio to server''' #CV
-    print('FUNCTION play_recording STARTED')
-    wf = wave.open(current_app.config['FILEDIR'] + session['wavename'], 'rb')
-    print('OPENED WAVE FILE')
-    print('NUMBER OF FRAMES')
-    print(wf.getnframes())
-    p = pyaudio.PyAudio() #CV
-    print('CREATED PY AUDIO OBJECT P')
-    stream = p.open(format = p.get_format_from_width(wf.getsampwidth()), #CV
-                channels = wf.getnchannels(),   #CV
-                rate = 48000,   #CV
-                output = True)  #CV
-
-    print('CREATED STREAM')
-    data = wf.readframes(chunk) #CV
-    print('CREATED DATA')
-
-    #Play audio data
-    while data != b'':              #CV
-        stream.write(data)          #CV
-        data = wf.readframes(chunk) #CV
-    print('PLAYED AUDIO DATA')
+#     #Play audio data
+#     while data != b'':              #CV
+#         stream.write(data)          #CV
+#         data = wf.readframes(chunk) #CV
+#     print('PLAYED AUDIO DATA')
     
 
-    #Closing statements
-    print('DELETING WAV FILE: ' + session['wavename'])
-    os.remove(current_app.config['FILEDIR'] + session['wavename'])
-    wf.close()
-    print('CLOSED WAVE')
-    stream.close()  #CV
-    print('CLOSED STREAM')
-    p.terminate()   #CV
-    print('TERMINATED AUDIO OBJECT P')
-    del session['wavename']
-    print('DELETED SESSION')
+#     #Closing statements
+#     print('DELETING WAV FILE: ' + session['wavename'])
+#     os.remove(current_app.config['FILEDIR'] + session['wavename'])
+#     wf.close()
+#     print('CLOSED WAVE')
+#     stream.close()  #CV
+#     print('CLOSED STREAM')
+#     p.terminate()   #CV
+#     print('TERMINATED AUDIO OBJECT P')
+#     del session['wavename']
+#     print('DELETED SESSION')
 
 
 
 if __name__ == '__main__':
+    cf = 'cert.pem'
+    kf = 'key.pem'
     # app.run(host='0.0.0.0', port=80, threaded=True, debug=False)
-    cf = '/home/pi/flask-video-streaming/cert.pem'
-    kf = '/home/pi/flask-video-streaming/key.pem'
-    socketio.run(app, host='0.0.0.0', port=443, certfile=cf, keyfile=kf)
+    app.run(host='0.0.0.0', port=443, threaded=True, ssl_context=(cf, kf))
+    # socketio.run(app, host='0.0.0.0', port=443, certfile=cf, keyfile=kf)

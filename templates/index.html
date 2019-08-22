@@ -40,31 +40,8 @@
         <button class="arrow-button" id='btn_down'><i class="fa fa-caret-down"></i></button>
         <button class="arrow-button" id='btn_right'><i class="fa fa-caret-right"></i></button>
       </div>
-      <div id="controls">
-        <img id="record" src="{{ url_for('static', filename='audio/mic128.png') }}" onclick="toggleRecording(this);">
-      </div>
   </div>
-
 <!--
-2-WAY AUDIO CODE  
--->
-
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.slim.js"></script>
-<script src="{{ url_for('static', filename='audio/main.js') }}"></script>
-
-<script>
-  // One-liner to resume playback when user interacted with the page.
-  document.querySelector('#record').addEventListener('click', function() {
-  audioContext.resume().then(() => {
-  console.log('Playback resumed successfully');
-      });
-  });
-</script>
-
-<!--
-
-  2-WAY AUDIO CODE END
 -->
 
 

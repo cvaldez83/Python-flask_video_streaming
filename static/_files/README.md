@@ -1,1 +1,1 @@
-File uploads are stored in this directory.
+Audio files are stored in this directory.
