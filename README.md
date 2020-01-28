@@ -13,3 +13,8 @@ Hardware Requirements:
 - tilt/pan servo bracket of your choice
 - Small speaker of your choice
 - USB-to-3.5mm jack adapter (example: https://www.amazon.com/Audio-Technica-ATR2USB-3-5mm-Audio-Adapter/dp/B00I6ILPPC)
+
+Install steps:
+- git clone this repo
+- terminal command: . setup.sh
+- 
