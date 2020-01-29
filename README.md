@@ -25,10 +25,15 @@ This forked version of Miguel Grinberg's flask-video-streaming repo has been mod
 - Python 3.5 or greater
 - Servoblaster (to control camera servos)
 
-### Installation steps:
+### Install Servoblaster:
 - change to home directory by typing: cd ~
-- Install servoblaster by following link: https://github.com/richardghirst/PiBits/tree/master/ServoBlaster
-- git clone this repo by typing: git clone TBD
+- git clone servoblaster (https://github.com/richardghirst/PiBits/tree/master/ServoBlaster)
+- change to directory: cd PiBits/ServoBlaster/user/
+- create servoblaster daemon by typing: make servod
+
+### Install this repo
+- change to home directory by typing: cd ~
+- git clone this repo by typing: git clone https://github.com/cvaldez83/Python-flask_video_streaming.git
 - change directory by typing: cd Python-flask_video_streaming/
 - use a text editor to edit the "credentials.py" file.  Change the "login_u" and "login_p" to whatever you like.
 - run setup.sh from terminal by typing: . setup.sh
