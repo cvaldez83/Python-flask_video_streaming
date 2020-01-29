@@ -3,8 +3,8 @@ import os
 from time import sleep
 
 PIN_DISPENSE = 4
-SERVO_TILT = 2 #PIN 18
-SERVO_PAN = 6 #PIN 24
+SERVO_TILT = 2 # GPIO PIN 18
+SERVO_PAN = 6 # GPIO PIN 24
 
 # servoblaster limits: Units: 100 = 1ms
 hilim_tilt_pos = 200.0   # full down (full down limit = 230)
@@ -23,7 +23,7 @@ TILT_INCREMENT = 20
 def setServo(servoChannel, position):
     servoStr ="%u=%u" % (servoChannel, position)
     print("echo " + servoStr + " > /dev/servoblaster")
-    os.system("sudo /home/pi/flask-video-streaming_temp/PiBits/ServoBlaster/user/servod")
+    os.system("sudo " + os.environ['HOME'] + "/PiBits/ServoBlaster/user/servod")
     os.system("echo " + servoStr + " > /dev/servoblaster")
     sleep(SERVO_DELAY)
 
@@ -35,7 +35,7 @@ class PiThing(object):
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(PIN_DISPENSE, GPIO.OUT, initial=GPIO.LOW) #Dispense pin as output
         # Start servoblaster
-        os.system("sudo /home/pi/flask-video-streaming_temp/PiBits/ServoBlaster/user/servod")
+        os.system("sudo " + os.environ['HOME'] + "/PiBits/ServoBlaster/user/servod")
         print('__init__: Set init_tilt_pos', init_tilt_pos)
         self.tilt = init_tilt_pos
         # setServo(SERVO_TILT, init_tilt_pos)
