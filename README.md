@@ -16,5 +16,11 @@ Hardware Requirements:
 
 Install steps:
 - git clone this repo
-- terminal command: . setup.sh
-- 
+- change directory by typing: cd Python-flask_video_streaming/
+- run setup.sh from terminal by typing: . setup.sh
+- create ssl files "key.pem" and "cert.pem" by typing: openssl req -newkey rsa:2048 -nodes -keyout key.pem -x509 -days 365 -out cert.pem
+- fill in the information to create the ssl files
+
+Starting the app:
+- Activate the python virtual environment by typing: . ae.sh
+- Start the app by typing: . start.sh
