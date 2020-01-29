@@ -23,7 +23,7 @@ Setup of treat dispensing servo (Optional):
 
 Software Requirements:
 - Python 3.5 or greater
-- servoblaster 
+- Servoblaster (to control camera servos)
 
 Installation steps:
 - Install servoblaster by following link: https://github.com/richardghirst/PiBits/tree/master/ServoBlaster
