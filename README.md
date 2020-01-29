@@ -6,6 +6,8 @@ Software Requirements:
 - Python 3.5 or greater
 - servoblaster (https://github.com/richardghirst/PiBits/tree/master/ServoBlaster)
 
+## Hardware
+
 Hardware Requirements:
 - Raspberry pi 3 or greater
 - Raspberry pi camera module (example: https://www.raspberrypi.org/products/camera-module-v2/)
@@ -13,6 +15,15 @@ Hardware Requirements:
 - tilt/pan servo bracket of your choice
 - Small speaker of your choice
 - USB-to-3.5mm jack adapter (example: https://www.amazon.com/Audio-Technica-ATR2USB-3-5mm-Audio-Adapter/dp/B00I6ILPPC)
+
+Setup of Camera Servos:
+- Install servo pin for tilting to GPIO 18
+- Install servo pin for panning to GPIO 24
+
+Setup of treat dispensing servo (Optional):
+- Install servo pin for treat dispensing to GPIO 4
+
+## Software
 
 Installation steps:
 - git clone this repo
@@ -26,3 +37,6 @@ Installation steps:
 Starting the app:
 - Activate the python virtual environment by typing: . ae.sh
 - Start the app by typing: . start.sh
+- Now type in your public IP in the browser and you should see the page
+
+
