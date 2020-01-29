@@ -17,6 +17,7 @@ Hardware Requirements:
 Installation steps:
 - git clone this repo
 - change directory by typing: cd Python-flask_video_streaming/
+- use a text editor to edit the "credentials.py" file.  Change the "login_u" and "login_p" to whatever you like.
 - run setup.sh from terminal by typing: . setup.sh
 - create ssl files "key.pem" and "cert.pem" by typing: openssl req -newkey rsa:2048 -nodes -keyout key.pem -x509 -days 365 -out cert.pem
 - fill in the information to create the ssl files
