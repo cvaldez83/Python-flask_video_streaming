@@ -2,10 +2,6 @@
 
 This forked version of Miguel Grinberg's flask-video-streaming repo has been modified to allow the use of two servos to pan and tilt the picamera.  Servos are controlled from client's web browser.
 
-Software Requirements:
-- Python 3.5 or greater
-- servoblaster (https://github.com/richardghirst/PiBits/tree/master/ServoBlaster)
-
 ## Hardware
 
 Hardware Requirements:
@@ -25,7 +21,12 @@ Setup of treat dispensing servo (Optional):
 
 ## Software
 
+Software Requirements:
+- Python 3.5 or greater
+- servoblaster 
+
 Installation steps:
+- Install servoblaster by following link: https://github.com/richardghirst/PiBits/tree/master/ServoBlaster
 - git clone this repo
 - change directory by typing: cd Python-flask_video_streaming/
 - use a text editor to edit the "credentials.py" file.  Change the "login_u" and "login_p" to whatever you like.
