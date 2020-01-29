@@ -14,12 +14,13 @@ Hardware Requirements:
 - Small speaker of your choice
 - USB-to-3.5mm jack adapter (example: https://www.amazon.com/Audio-Technica-ATR2USB-3-5mm-Audio-Adapter/dp/B00I6ILPPC)
 
-Install steps:
+Installation steps:
 - git clone this repo
 - change directory by typing: cd Python-flask_video_streaming/
 - run setup.sh from terminal by typing: . setup.sh
 - create ssl files "key.pem" and "cert.pem" by typing: openssl req -newkey rsa:2048 -nodes -keyout key.pem -x509 -days 365 -out cert.pem
 - fill in the information to create the ssl files
+- setup port forwarding on your router to forward traffic coming from port 443 to your raspberry pi's port 443
 
 Starting the app:
 - Activate the python virtual environment by typing: . ae.sh
